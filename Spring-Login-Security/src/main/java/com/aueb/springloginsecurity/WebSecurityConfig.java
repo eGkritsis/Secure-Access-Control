@@ -28,41 +28,25 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        /*
-        http.formLogin()
+        http
+                .authorizeRequests()
+                .requestMatchers("/login.html").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
                 .loginPage("/login.html")
                 .loginProcessingUrl("/perform_login")
-                .defaultSuccessUrl("/homepage.html",true)
-                .failureUrl("/login.html?error=true");
-        return http.build();
-        */
-
-
-
-        http.formLogin()
-            .loginPage("/login.html")
-            .loginProcessingUrl("/login.html")
-            .failureUrl("/login-error")
-            .defaultSuccessUrl("/home")
-            .usernameParameter("username")
-            .passwordParameter("password");
-
-        /*
-        http.authorizeRequests()
-                .requestMatchers("/")
-                .permitAll()
-                .requestMatchers("/home")
-                .hasAuthority("user")
-                .requestMatchers("/admin")
-                .hasAuthority("admin")
-                .anyRequest()
-                .authenticated()
+                .defaultSuccessUrl("/homepage.html", true)
+                .failureUrl("/login.html?error=true")
+                .usernameParameter("username")
+                .passwordParameter("password")
                 .and()
-                .httpBasic()
+                .authenticationProvider(authenticationProvider())
+                .logout()
+                .logoutUrl("/perform_logout")
+                .logoutSuccessUrl("/login.html")
                 .and()
-                .csrf()
-                .disable();
-         */
+                .csrf().disable();
         return http.build();
     }
 
