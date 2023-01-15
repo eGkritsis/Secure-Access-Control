@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Login</title>
 	<style>
@@ -58,6 +58,10 @@
 		<input type="password" id="password" name="password">
 		<input type="submit" value="Login">
 	</form>
+	<div>
+		Remaining Attempts: <p th:text="${remainingAttempts}"> </p>
+		Test: <span th:text="${test}"></span>
+	</div>
 </div>
 </body>
 </html>
