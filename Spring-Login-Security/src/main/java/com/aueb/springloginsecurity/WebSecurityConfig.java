@@ -17,6 +17,10 @@ import org.springframework.security.web.SecurityFilterChain;
 public class WebSecurityConfig {
     @Autowired
     private UserDetailsService userDetailsService;
+    @Autowired
+    private CustomLoginFailureHandler loginFailureHandler;
+    @Autowired
+    private CustomLoginSuccessHandler loginSuccessHandler;
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -51,6 +55,8 @@ public class WebSecurityConfig {
                 .failureUrl("/login.html?error=true")
                 .usernameParameter("username")
                 .passwordParameter("password")
+                .failureHandler(loginFailureHandler)
+                .successHandler(loginSuccessHandler)
                 .and()
                 .authenticationProvider(authenticationProvider())
                 .logout()
