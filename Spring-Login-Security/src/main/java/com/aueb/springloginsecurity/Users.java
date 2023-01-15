@@ -1,5 +1,6 @@
 package com.aueb.springloginsecurity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -10,6 +11,16 @@ public class Users {
     private String username;
     private String password;
     private String description;
+
+    @Column(name = "account_non_locked")
+    private boolean account_non_locked;
+
+    public int getLogin_attempts() {
+        return login_attempts;
+    }
+
+    @Column(name = "login_attempts")
+    private int login_attempts;
 
     public Long getId() {
         return id;
@@ -51,5 +62,13 @@ public class Users {
                 ", password='" + password + '\'' +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    public boolean isAccountNonLocked() {
+        return this.account_non_locked;
+    }
+
+    public void setAccountNonLocked(boolean value) {
+        this.account_non_locked = value;
     }
 }
