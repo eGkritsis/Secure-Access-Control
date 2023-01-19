@@ -28,7 +28,7 @@ public class MyUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
-        loggingService.logSuccessfulLogin(username);
+        //loggingService.logSuccessfulLogin(username);
         return user;
     }
 
