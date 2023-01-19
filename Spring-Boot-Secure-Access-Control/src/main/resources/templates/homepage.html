@@ -3,10 +3,29 @@
     <head>
         <meta charset="UTF-8">
         <title>Title</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                padding: 20px;
+            }
+
+            h1 {
+                color: #333;
+                margin-bottom: 20px;
+            }
+
+            p {
+                font-size: 14px;
+                margin-bottom: 10px;
+                color: #555;
+            }
+
+        </style>
     </head>
     <body>
         <h1>Welcome <span th:text="${session.user.getUsername()}"></span></h1>
         <p>Last password change: <span th:text="${session.lastPasswordChange}"></span></p>
-        <p>Your password will expire in <span th:text="${session.remainingMinutes}"></span> minutes</p>
+        <p>Your password will expire in <span th:text="${session.formattedRemainingTime}"></span></p>
     </body>
 </html>
