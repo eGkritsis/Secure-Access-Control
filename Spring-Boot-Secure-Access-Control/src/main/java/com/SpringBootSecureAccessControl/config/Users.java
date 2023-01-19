@@ -1,8 +1,11 @@
-package com.aueb.springloginsecurity;
+package com.SpringBootSecureAccessControl.config;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import org.springframework.cglib.core.Local;
+
+import java.time.LocalDateTime;
 
 @Entity
 public class Users {
@@ -14,6 +17,16 @@ public class Users {
 
     @Column(name = "account_non_locked")
     private boolean account_non_locked;
+
+    @Column(name = "last_password_change")
+    private LocalDateTime lastPasswordChange;
+
+    public LocalDateTime getLastPasswordChange() {
+        return lastPasswordChange;
+    }
+    public void setLastPasswordChange(LocalDateTime lastPasswordChange) {
+        this.lastPasswordChange = lastPasswordChange;
+    }
 
     public int getLogin_attempts() {
         return login_attempts;
@@ -61,6 +74,8 @@ public class Users {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", description='" + description + '\'' +
+                ", account_non_locked=" + account_non_locked +
+                ", login_attempts=" + login_attempts +
                 '}';
     }
 

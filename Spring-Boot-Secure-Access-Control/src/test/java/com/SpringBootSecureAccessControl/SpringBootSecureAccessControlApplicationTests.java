@@ -1,10 +1,10 @@
-package com.aueb.springloginsecurity;
+package com.SpringBootSecureAccessControl;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringLoginSecurityApplicationTests {
+class SpringBootSecureAccessControlApplicationTests {
 
 	@Test
 	void contextLoads() {

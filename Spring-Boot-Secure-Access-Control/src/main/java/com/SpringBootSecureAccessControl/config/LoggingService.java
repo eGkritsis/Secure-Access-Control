@@ -1,4 +1,4 @@
-package com.aueb.springloginsecurity;
+package com.SpringBootSecureAccessControl.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

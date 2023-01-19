@@ -1,4 +1,4 @@
-package com.aueb.springloginsecurity;
+package com.SpringBootSecureAccessControl.config;
 
 import jakarta.persistence.*;
 

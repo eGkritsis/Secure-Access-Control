@@ -1,6 +1,5 @@
-package com.aueb.springloginsecurity;
+package com.SpringBootSecureAccessControl.config;
 
-import org.apache.juli.logging.Log;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

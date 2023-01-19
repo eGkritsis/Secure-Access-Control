@@ -1,4 +1,4 @@
-package com.aueb.springloginsecurity;
+package com.SpringBootSecureAccessControl.config;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,17 +9,14 @@ import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
+
 
 import java.io.IOException;
 
-import static com.aueb.springloginsecurity.MyUserDetailsService.MAX_FAILED_ATTEMPTS;
+import static com.SpringBootSecureAccessControl.config.MyUserDetailsService.MAX_FAILED_ATTEMPTS;
 
 @Component
 public class CustomLoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
-    Model model;
     private int remainingAttempts;
     @Autowired
     private UserRepository userRepository;
@@ -32,18 +29,21 @@ public class CustomLoginFailureHandler extends SimpleUrlAuthenticationFailureHan
         Users user = myUserDetailsService.loadUsersByUsername(username);
 
         if (user != null) {
-            if (user.getLogin_attempts() < MAX_FAILED_ATTEMPTS) {
-                myUserDetailsService.increaseLoginAttempts(user);
-            } else {
+            if (user.getLogin_attempts() == MAX_FAILED_ATTEMPTS) {
                 myUserDetailsService.lock(user);
-                exception = new LockedException("Your account has been locked due to 3 failed attempts");
+                exception = new LockedException("Your account has been locked due to 4 failed attempts");
+            } else if (user.getLogin_attempts() < MAX_FAILED_ATTEMPTS) {
+                myUserDetailsService.increaseLoginAttempts(user);
             }
         }
-        remainingAttempts = myUserDetailsService.findRemainingAttemptsByUsername(user.getUsername());
-        //model.addAttribute("remainingAttempts", remainingAttempts);
 
-        request.setAttribute("remainingAttempts", remainingAttempts);
-        super.setDefaultFailureUrl("/login?error=true");
+        remainingAttempts = myUserDetailsService.findRemainingAttemptsByUsername(username);
+
+        HttpSession session = request.getSession();
+        session.setAttribute("user", user);
+        session.setAttribute("remainingAttempts", remainingAttempts);
+
+        super.setDefaultFailureUrl("/login");
         super.onAuthenticationFailure(request, response, exception);
     }
 }

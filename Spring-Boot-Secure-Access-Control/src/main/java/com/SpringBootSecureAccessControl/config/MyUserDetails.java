@@ -1,4 +1,4 @@
-package com.aueb.springloginsecurity;
+package com.SpringBootSecureAccessControl.config;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -8,7 +8,6 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class MyUserDetails implements UserDetails {
-
     private Users user;
 
     public MyUserDetails(Users user) {
