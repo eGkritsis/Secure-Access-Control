@@ -11,7 +11,10 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.time.temporal.ChronoUnit;
 
 @Component
@@ -25,14 +28,28 @@ public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         Users user = myUserDetails.getUser();
 
         LocalDateTime lastPasswordChange = user.getLastPasswordChange();
-        LocalDateTime now = LocalDateTime.now();
-        long remainingMinutes = 90*24*60 - ChronoUnit.MINUTES.between(lastPasswordChange, now);
 
+        LocalDateTime now = LocalDateTime.now();
+
+        long totalMinutes = 90*24*60;
+        LocalDateTime expirationDate = lastPasswordChange.plusMinutes(totalMinutes);
+        Duration remainingDuration = Duration.between(now, expirationDate);
+
+        Period remainingPeriod = Period.between(now.toLocalDate(), expirationDate.toLocalDate());
+        long remainingSeconds = remainingDuration.getSeconds();
+        long remainingMinutes = remainingDuration.toMinutes();
+        long remainingHours = remainingDuration.toHours();
+        long remainingDays = remainingDuration.toDays();
+        long remainingMonths = remainingPeriod.getMonths();
+        long remainingYears = remainingPeriod.getYears();
+
+
+        String formattedRemainingTime = remainingYears + " years, " + remainingMonths + " months, " + remainingDays % 30 + " days, " + remainingHours % 24 + " hours, " + remainingMinutes % 60 + " minutes, " + remainingSeconds % 60 + " seconds.";
 
 
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
-        session.setAttribute("remainingMinutes", remainingMinutes);
+        session.setAttribute("formattedRemainingTime", formattedRemainingTime);
         session.setAttribute("lastPasswordChange", lastPasswordChange);
 
         if (user.getLogin_attempts() > 0) {
