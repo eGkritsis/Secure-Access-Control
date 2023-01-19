@@ -1,13 +1,10 @@
 package com.SpringBootSecureAccessControl.controller;
 
-import com.SpringBootSecureAccessControl.config.MyUserDetails;
 import com.SpringBootSecureAccessControl.config.MyUserDetailsService;
-import com.SpringBootSecureAccessControl.config.UserRepository;
 import com.SpringBootSecureAccessControl.config.Users;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
