@@ -31,6 +31,7 @@ public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
 
 
         HttpSession session = request.getSession();
+        session.setAttribute("user", user);
         session.setAttribute("remainingMinutes", remainingMinutes);
         session.setAttribute("lastPasswordChange", lastPasswordChange);
 

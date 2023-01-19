@@ -5,8 +5,8 @@
         <title>Title</title>
     </head>
     <body>
-        <h1>HOMEPAGE</h1>
-        <p>Your password will expire in <span th:text="${session.remainingMinutes}"></span> minutes</p>
+        <h1>Welcome <span th:text="${session.user.getUsername()}"></span></h1>
         <p>Last password change: <span th:text="${session.lastPasswordChange}"></span></p>
+        <p>Your password will expire in <span th:text="${session.remainingMinutes}"></span> minutes</p>
     </body>
 </html>
