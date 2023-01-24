@@ -78,7 +78,9 @@ public class Users {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", description='" + description + '\'' +
+                ", salt='" + salt + '\'' +
                 ", account_non_locked=" + account_non_locked +
+                ", lastPasswordChange=" + lastPasswordChange +
                 ", login_attempts=" + login_attempts +
                 '}';
     }
