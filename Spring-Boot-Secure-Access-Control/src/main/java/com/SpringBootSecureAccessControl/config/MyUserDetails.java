@@ -9,10 +9,12 @@ import java.util.Collections;
 
 public class MyUserDetails implements UserDetails {
     private Users user;
+    private String salt;
 
-    public MyUserDetails(Users user) {
+    public MyUserDetails(Users user, String salt) {
         super();
         this.user = user;
+        this.salt = salt;
     }
 
     @Override

@@ -20,7 +20,7 @@ public class MyUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
         loggingService.logSuccessfulLogin(username);
-        return new MyUserDetails(user);
+        return new MyUserDetails(user, user.getSalt());
     }
 
     public Users loadUsersByUsername(String username) throws UsernameNotFoundException {

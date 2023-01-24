@@ -3,7 +3,6 @@ package com.SpringBootSecureAccessControl.config;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
 
@@ -14,6 +13,7 @@ public class Users {
     private String username;
     private String password;
     private String description;
+    private String salt;
 
     @Column(name = "account_non_locked")
     private boolean account_non_locked;
@@ -34,6 +34,10 @@ public class Users {
 
     @Column(name = "login_attempts")
     private int login_attempts;
+
+    public String getSalt() {
+        return this.salt;
+    }
 
     public Long getId() {
         return id;
