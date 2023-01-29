@@ -19,8 +19,6 @@ import static com.SpringBootSecureAccessControl.config.MyUserDetailsService.MAX_
 public class CustomLoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
     private int remainingAttempts;
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
     private MyUserDetailsService myUserDetailsService;
 
     @Override
